@@ -70,7 +70,7 @@ export class TypingContentComponent implements OnInit {
 
   listenKeyDown($event) {
     // 记录当前字的按键。并更新有效按键次数
-    if ($event.key === 'Process') {
+    if ($event.key === 'Process' || !($event.key >= 'a' && $event.key <= 'z')) {
       this.wordDetails[this.currentIndexWithPage].appendChar($event.code);
 
       if ($event.code === 'Backspace') {
@@ -133,17 +133,22 @@ export class TypingContentComponent implements OnInit {
   onValueChanged(i, j, $event) {
     // 去除空格
     let newValue = $event.target.value.trim();
+
+    if (newValue >= 'a' && newValue <= 'z') {
+      $event.target.value = '';
+      return ;
+    }
+
     $event.target.value = newValue;
     this.inputValues[i * this.wordCountPerLine + j] = newValue;
 
     // 更新wordDetails的值
     const inputIndex = i * this.wordCountPerLine + j + this.pageIndex * this.wordPerPage;
     this.wordDetails[inputIndex].updateValue(newValue);
-
     // 去除非中文
     if (!/^[\u4E00-\u9FA5]+$/.test(newValue)) {
       newValue = $event.target.value = '';
-      this.wordDetails[inputIndex].updateValue(newValue);
+      return ;
     }
 
     if (newValue.length >= 1) {
