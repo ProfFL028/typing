@@ -1,0 +1,50 @@
+h2 {
+  padding: 0;
+  margin: 0 auto;
+}
+.wordInput {
+  width: 30px;
+  height:50px;
+  font-size: 30px;
+  outline: none;
+  border: 0px;
+}
+
+.font-red {
+  color: red;
+}
+.font-pink {
+  color: pink;
+}
+.font-purple {
+  color: mediumpurple;
+}
+
+.words {
+  font-size:30px;
+  margin:0px auto;
+}
+
+.leftAndRightLine {
+  border-left: 2px solid blue;
+  border-right: 2px solid blue;
+}
+.bottomLine {
+  border-bottom: 2px solid blue;
+}
+.topLine {
+  border-top: 2px solid blue;
+}
+.borderLine {
+  border: 2px solid blue;
+}
+
+.marginBottom {
+  margin-bottom: 30px;
+}
+
+.marchInfo {
+  margin-top: 5px;
+  margin-left: 20px;
+  margin-right: 10px;
+}

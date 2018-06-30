@@ -1,0 +1,9 @@
+<app-typing-configure [config]="configService.config$ | async"
+                      (configChange)="onConfigChange($event)"
+                      (refreshClick)="onRefreshClick($event)">
+</app-typing-configure>
+<app-typing-content #typingContent [config]="configService.config$ | async" [wordDetails]="words$ | async"
+  [wordCountPerLine]="WORD_COUNT_PER_LINE" [lineCount]="LINE_COUNT" [pageCount]="PAGE_COUNT">
+
+</app-typing-content>
+

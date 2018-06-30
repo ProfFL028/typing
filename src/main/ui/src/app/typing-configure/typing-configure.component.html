@@ -1,0 +1,22 @@
+<div fxLayout="row" *ngIf="config; else loading">
+  <div fxFlex></div>
+  <mat-checkbox fxFlex [(ngModel)]="config.isMarch" (change)="onConfigChange()">比赛模式</mat-checkbox>
+  <span fxFlex></span>
+  <mat-checkbox [disabled]="config.isMarch" [(ngModel)]="config.isRepeat" fxFlex (change)="onConfigChange()">字库重复</mat-checkbox>
+  <span fxFlex></span>
+  <mat-checkbox [disabled]="config.isMarch" [(ngModel)]="config.tipsOnExtra" fxFlex (change)="onConfigChange()">多码提示</mat-checkbox>
+  <span fxFlex></span>
+  <div fxFlex fxLayout="row" >
+    <mat-checkbox [disabled]="config.isMarch" fxFlex [(ngModel)]="config.tipsOnHard" (change)="onConfigChange()">超时提示</mat-checkbox>
+    <mat-form-field style="margin-top: -10px;">
+      <input [disabled]="!config.tipsOnHard" [(ngModel)]="config.hardTime" (change)="onConfigChange()" matInput placeholder="超过多少毫秒提示" type="number">
+    </mat-form-field>
+  </div>
+  <span fxFlex></span>
+  <mat-checkbox [disabled]="config.isMarch" [(ngModel)]="config.autoRefresh" fxFlex (change)="onConfigChange()">打字速度自动更新</mat-checkbox>
+  <span fxFlex></span>
+  <button mat-raised-button color="primary" (click)="onRefreshClick($event, config)">重置</button>
+</div>
+<ng-template #loading>
+  加载中....
+</ng-template>

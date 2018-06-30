@@ -1,0 +1,48 @@
+<div class="column" (window:keydown)="listenKeyDown($event)" (window:keyup)="listenKeyUp($event)" >
+  <div class="borderLine" fxLayout="column">
+    <h1 fxLayout="row">
+      <countdown class="marchInfo" #myCD [config]="{leftTime: 300, demand: true, repaint: onRepaint()}" (finished)="onFinished($event)">
+        剩余时间：<code>$!m!</code>分<code>$!s!</code>秒
+      </countdown>
+      <span fxFlex></span>
+      <div class="marchInfo">输入总数<code>&nbsp;{{ practice.totalCount }}&nbsp;</code>个</div>
+      <span fxFlex></span>
+      <div class="marchInfo">其中正确<code>&nbsp;{{ practice.rightCount}}&nbsp;</code>个</div>
+    </h1>
+    <h1 class="marginBottom" fxLayout="row">
+      <div class="marchInfo">打字速度：<code>{{ printSpeed | number: '3.2-2' }}</code>&nbsp;个/每分钟</div>
+      <span fxFlex></span>
+      <div class="marchInfo">准确率：{{ (practice.rightCount * 100.0 / practice.totalCount | number: '2.2-2')}}% </div>
+      <span fxFlex></span>
+    </h1>
+  </div>
+  <div *ngFor="let i of [] | range: lineCount" class="leftAndRightLine" [class.bottomLine]="i === (lineCount - 1)">
+    <p class="words" fxLayoutAlign="center center" *ngIf="wordDetails; else loading">
+      <span *ngFor="let word of wordDetails | sublist:i*wordCountPerLine + pageIndex * wordCountPerLine * lineCount:wordCountPerLine">{{word.word.word}}</span>
+    </p>
+    <div fxLayoutAlign="center center">
+      <input #input type="text" *ngFor="let j of [] | range: wordCountPerLine"
+             [(ngModel)]="inputValues[i * wordCountPerLine + j]"
+             [id]="'wi'+(i * wordCountPerLine + j)"
+             [autofocus]="i === 0 && j === 0"
+             (input)="onValueChanged(i, j, $event)"
+             (click)="onInputClick()"
+             (keydown)="onInputKeyDown($event)"
+             [class]="getInputClass(i, j)"
+             [disabled]="config.isMarch && isFinished"
+      >
+    </div>
+  </div>
+  <ng-template #loading>加载中...</ng-template>
+</div>
+<div fxLayout="row" style="padding-top: 10px" *ngIf="wordDetails; else loading">
+  <p>上个字时长：<code>{{ wordDetails[currentIndexWithPage>=1?currentIndexWithPage - 1:currentIndexWithPage].typingDuration / 1000.0 |
+    number:
+    '1.3-3'}}</code></p>
+  <span fxFlex></span>
+  <p>删除键输入次数：<code>{{ practice.backspaceCount }}</code></p>
+  <span fxFlex></span>
+  <p>回车键软入次数：<code>{{ practice.enterCount }}</code></p>
+  <span fxFlex></span>
+  <p>提示：{{wordDetails[currentIndexWithPage].word.inputChars}}</p>
+</div>
