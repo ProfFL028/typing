@@ -1,6 +1,6 @@
 <div class="column" (window:keydown)="listenKeyDown($event)" (window:keyup)="listenKeyUp($event)" >
   <div class="borderLine" fxLayout="column">
-    <h1 fxLayout="row">
+    <h3 fxLayout="row">
       <countdown class="marchInfo" #myCD [config]="{leftTime: 300, demand: true, repaint: onRepaint()}" (finished)="onFinished($event)">
         剩余时间：<code>$!m!</code>分<code>$!s!</code>秒
       </countdown>
@@ -8,13 +8,13 @@
       <div class="marchInfo">输入总数<code>&nbsp;{{ practice.totalCount }}&nbsp;</code>个</div>
       <span fxFlex></span>
       <div class="marchInfo">其中正确<code>&nbsp;{{ practice.rightCount}}&nbsp;</code>个</div>
-    </h1>
-    <h1 class="marginBottom" fxLayout="row">
+    </h3>
+    <h3 class="marginBottom" fxLayout="row">
       <div class="marchInfo">打字速度：<code>{{ printSpeed | number: '3.2-2' }}</code>&nbsp;个/每分钟</div>
       <span fxFlex></span>
       <div class="marchInfo">准确率：{{ (practice.rightCount * 100.0 / practice.totalCount | number: '2.2-2')}}% </div>
       <span fxFlex></span>
-    </h1>
+    </h3>
   </div>
   <div *ngFor="let i of [] | range: lineCount" class="leftAndRightLine" [class.bottomLine]="i === (lineCount - 1)">
     <p class="words" fxLayoutAlign="center center" *ngIf="wordDetails; else loading">

@@ -1,7 +1,4 @@
-h2 {
-  padding: 0;
-  margin: 0 auto;
-}
+
 .wordInput {
   width: 30px;
   height:50px;
@@ -40,7 +37,7 @@ h2 {
 }
 
 .marginBottom {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .marchInfo {
