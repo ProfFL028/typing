@@ -17,9 +17,11 @@ import {CountdownModule} from 'ngx-countdown';
 import {HttpClientModule} from '@angular/common/http';
 import { TypingConfigureComponent } from './typing-configure/typing-configure.component';
 import { TypingContentComponent } from './typing-content/typing-content.component';
+import { AnalysisComponent } from './analysis/analysis.component';
 
 const appRoutes: Routes = [
-  {path: 'typing', component: TypingComponent}
+  {path: 'typing', component: TypingComponent},
+  {path: 'analysis', component: AnalysisComponent}
 ];
 
 @NgModule({
@@ -28,7 +30,8 @@ const appRoutes: Routes = [
     TypingComponent,
     MenuComponent,
     TypingConfigureComponent,
-    TypingContentComponent
+    TypingContentComponent,
+    AnalysisComponent
   ],
   imports: [
     BrowserModule,

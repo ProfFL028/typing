@@ -69,8 +69,9 @@ export class TypingContentComponent implements OnInit {
   }
 
   listenKeyDown($event) {
+    console.log($event);
     // 记录当前字的按键。并更新有效按键次数
-    if ($event.key === 'Process' || !($event.key >= 'a' && $event.key <= 'z')) {
+    if ($event.key === 'Process' || ($event.key >= 'a' && $event.key <= 'z')) {
       this.wordDetails[this.currentIndexWithPage].appendChar($event.code);
 
       if ($event.code === 'Backspace') {
@@ -148,7 +149,6 @@ export class TypingContentComponent implements OnInit {
     // 去除非中文
     if (!/^[\u4E00-\u9FA5]+$/.test(newValue)) {
       newValue = $event.target.value = '';
-      return ;
     }
 
     if (newValue.length >= 1) {
