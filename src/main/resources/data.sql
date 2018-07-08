@@ -1996,7 +1996,7 @@ insert into word values('糯', 'ofd');
 insert into word values('诺', 'yad');
 insert into word values('哦', 'ktr');
 insert into word values('欧', 'aqq');
-insert into word values('鸥', '鸥');
+insert into word values('鸥', 'aqqg');
 insert into word values('殴', 'aqm');
 insert into word values('藕', 'adiy');
 insert into word values('呕', 'kaqy');

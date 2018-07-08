@@ -6,7 +6,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 
 import 'hammerjs';
-import {MatButtonModule, MatCardModule, MatCheckboxModule, MatIconModule, MatInputModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatIconModule,
+  MatInputModule, MatPaginatorModule,
+  MatProgressSpinnerModule, MatSortModule, MatTableModule
+} from '@angular/material';
 import { TypingComponent } from './typing/typing.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -42,6 +49,10 @@ const appRoutes: Routes = [
     MatCheckboxModule,
     MatButtonModule,
     MatInputModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
     FlexLayoutModule,
     CustomModule,
     FormsModule,

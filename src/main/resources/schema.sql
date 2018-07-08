@@ -1,7 +1,7 @@
-drop table if exists word;
-drop table if exists practice;
-drop table if exists word_detail;
-drop table if exists config;
+-- drop table if exists word;
+-- drop table if exists practice;
+-- drop table if exists word_detail;
+-- drop table if exists config;
 
 create table word (
   word character (1) not null primary key,

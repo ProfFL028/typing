@@ -14,7 +14,6 @@ public class ConfigController {
     public @ResponseBody ConfigEntity getConfig() {
         return configService.getConfig();
     }
-
     @RequestMapping(value = "/api/config/put", method = RequestMethod.PUT)
     public @ResponseBody ConfigEntity updateConfig(@RequestBody ConfigEntity configEntity) {
         System.out.println(configEntity);

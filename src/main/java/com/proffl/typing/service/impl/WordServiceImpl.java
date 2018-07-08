@@ -1,5 +1,6 @@
 package com.proffl.typing.service.impl;
 
+import com.proffl.typing.entity.WordAnalysis;
 import com.proffl.typing.entity.WordEntity;
 import com.proffl.typing.repository.WordRepository;
 import com.proffl.typing.service.WordService;
@@ -23,11 +24,6 @@ public class WordServiceImpl implements WordService {
     private WordRepository wordRepository;
 
     @Override
-    public List<WordEntity> getWrongWords() {
-        return null;
-    }
-
-    @Override
     public List<WordEntity> getAllWords() {
         return wordRepository.findAll();
     }
@@ -38,6 +34,7 @@ public class WordServiceImpl implements WordService {
 
         if (allWords != null && allWords.size() > 0) {
             List<WordEntity> copyedWords = null;
+            // 如果不允许重复，则复制一份word，取出一个word后，从List中删除它。
             if (isRepeat) {
                 copyedWords = new ArrayList<>();
             } else {
@@ -55,5 +52,10 @@ public class WordServiceImpl implements WordService {
         }
 
         return words;
+    }
+
+    @Override
+    public List<WordAnalysis> getAnalyzedWords(int pageSize, int pageIndex) {
+        return wordRepository.getAnalyzedWords(pageSize, pageIndex);
     }
 }
