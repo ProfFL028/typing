@@ -16,7 +16,7 @@ export class AnalysisComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource = new AnalyzedWordsDataSource(this.wordService);
-    this.dataSource.loadAnalyzedWords(30, 1, '');
+    this.dataSource.loadAnalyzedWords(10, 1, '');
   }
 
 }

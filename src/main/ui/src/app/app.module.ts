@@ -11,7 +11,7 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatIconModule,
-  MatInputModule, MatPaginatorModule,
+  MatInputModule, MatPaginatorIntl, MatPaginatorModule,
   MatProgressSpinnerModule, MatSortModule, MatTableModule
 } from '@angular/material';
 import { TypingComponent } from './typing/typing.component';
@@ -25,6 +25,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { TypingConfigureComponent } from './typing-configure/typing-configure.component';
 import { TypingContentComponent } from './typing-content/typing-content.component';
 import { AnalysisComponent } from './analysis/analysis.component';
+import {chPaginator} from './module/ch-paginator';
 
 const appRoutes: Routes = [
   {path: 'typing', component: TypingComponent},
@@ -60,7 +61,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {provide: MatPaginatorIntl, useValue: chPaginator()}
+  ],
   bootstrap: [AppComponent],
   exports: [
     CustomModule
