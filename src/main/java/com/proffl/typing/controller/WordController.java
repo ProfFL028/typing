@@ -25,8 +25,9 @@ public class WordController {
     public @ResponseBody
     List<WordAnalysis> getAnalyzedWords(
             @RequestParam(required = false, defaultValue = "30") Integer pageSize,
-            @RequestParam(required = false, defaultValue = "1") Integer pageIndex
+            @RequestParam(required = false, defaultValue = "1") Integer pageIndex,
+            @RequestParam(required = false, defaultValue = "") String filterLetter
     ) {
-        return wordService.getAnalyzedWords(pageSize, pageIndex);
+        return wordService.getAnalyzedWords(pageSize, pageIndex, filterLetter);
     }
 }

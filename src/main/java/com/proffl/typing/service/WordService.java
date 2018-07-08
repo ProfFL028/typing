@@ -20,7 +20,8 @@ public interface WordService {
      * 取分析后的word数据
      * @param pageSize
      * @param pageIndex
+     * @param filterLetter
      * @return
      */
-    List<WordAnalysis> getAnalyzedWords(int pageSize, int pageIndex);
+    List<WordAnalysis> getAnalyzedWords(int pageSize, int pageIndex, String filterLetter);
 }

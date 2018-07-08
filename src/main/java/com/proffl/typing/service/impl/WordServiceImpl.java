@@ -55,7 +55,7 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
-    public List<WordAnalysis> getAnalyzedWords(int pageSize, int pageIndex) {
-        return wordRepository.getAnalyzedWords(pageSize, pageIndex);
+    public List<WordAnalysis> getAnalyzedWords(int pageSize, int pageIndex, String filterLetter) {
+        return wordRepository.getAnalyzedWords(pageSize, pageIndex, filterLetter);
     }
 }
