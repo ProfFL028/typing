@@ -26,6 +26,7 @@ import { TypingConfigureComponent } from './typing-configure/typing-configure.co
 import { TypingContentComponent } from './typing-content/typing-content.component';
 import { AnalysisComponent } from './analysis/analysis.component';
 import {chPaginator} from './module/ch-paginator';
+import { WordDetailComponent } from './word-detail/word-detail.component';
 
 const appRoutes: Routes = [
   {path: 'typing', component: TypingComponent},
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
     MenuComponent,
     TypingConfigureComponent,
     TypingContentComponent,
-    AnalysisComponent
+    AnalysisComponent,
+    WordDetailComponent
   ],
   imports: [
     BrowserModule,

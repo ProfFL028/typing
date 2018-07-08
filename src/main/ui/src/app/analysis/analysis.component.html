@@ -1,27 +1,78 @@
 <div>
+  <mat-form-field>
+    <input #filterLetter matInput placeholder="包含字母" >
+  </mat-form-field>
+
   <div class="spinner-container" *ngIf="dataSource.loading$ | async">
     <mat-spinner></mat-spinner>
   </div>
 
-  <mat-table class="mat-elevation-z8" [dataSource]="dataSource"
-             matSort matSortActive="avgDuration" matSortDirection="desc" matSortDisableClear>
+  <mat-table class="mat-elevation-z8" [dataSource]="dataSource">
 
     <ng-container matColumnDef="word">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>汉字</mat-header-cell>
       <mat-cell *matCellDef="let analyzedWord">{{analyzedWord.word}}</mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="inputChars">
+      <mat-header-cell *matHeaderCellDef>输入字母</mat-header-cell>
+      <mat-cell class="description-cell"
+                *matCellDef="let analyzedWord">{{analyzedWord.inputChars}}</mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="avgDuration">
-      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>平均用时</mat-header-cell>
       <mat-cell class="description-cell"
                 *matCellDef="let analyzedWord">{{analyzedWord.avgDuration}}</mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="minDuration">
+      <mat-header-cell *matHeaderCellDef>最短时间</mat-header-cell>
+      <mat-cell class="description-cell"
+                *matCellDef="let analyzedWord">{{analyzedWord.minDuration}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="maxDuration">
+      <mat-header-cell *matHeaderCellDef>最长时间</mat-header-cell>
+      <mat-cell class="description-cell"
+                *matCellDef="let analyzedWord">{{analyzedWord.maxDuration}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="wrongCount">
+      <mat-header-cell *matHeaderCellDef>错误次数</mat-header-cell>
+      <mat-cell class="description-cell"
+                *matCellDef="let analyzedWord">{{analyzedWord.wrongCount}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="extraCount">
+      <mat-header-cell *matHeaderCellDef>多码次数</mat-header-cell>
+      <mat-cell class="description-cell"
+                *matCellDef="let analyzedWord">{{analyzedWord.extraCount}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="backspaceCount">
+      <mat-header-cell *matHeaderCellDef>后退次数</mat-header-cell>
+      <mat-cell class="description-cell"
+                *matCellDef="let analyzedWord">{{analyzedWord.backspaceCount}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="enterCount">
+      <mat-header-cell *matHeaderCellDef>回车次数</mat-header-cell>
+      <mat-cell class="description-cell"
+                *matCellDef="let analyzedWord">{{analyzedWord.enterCount}}</mat-cell>
+    </ng-container>
+
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClick(row)"></mat-row>
   </mat-table>
 
   <mat-paginator [length]="3755" [pageSize]="10"
                  [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
 </div>
+
+<!--<ng-template #tpl let-analyzedWord>-->
+  <!--<div class="mat-row" [@detailExpand] style="overflow: hidden">-->
+    <!--The symbol for {{analyzedWord.words}} is {{analyzedWord.}}-->
+  <!--</div>-->
+<!--</ng-template>-->
