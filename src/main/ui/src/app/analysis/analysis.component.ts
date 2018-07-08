@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AnalyzedWordsDataSource} from '../service/analyzed-words-data-source.service';
+import {WordService} from '../service/word.service';
 
 @Component({
   selector: 'app-analysis',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnalysisComponent implements OnInit {
 
-  constructor() { }
+  dataSource: AnalyzedWordsDataSource;
+  constructor(private wordService: WordService) { }
+
+  displayedColumns = ['word', 'avgDuration'];
 
   ngOnInit() {
+    this.dataSource = new AnalyzedWordsDataSource(this.wordService);
+    this.dataSource.loadAnalyzedWords(30, 1, '');
   }
 
 }

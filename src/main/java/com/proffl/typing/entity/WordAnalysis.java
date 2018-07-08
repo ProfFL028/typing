@@ -2,23 +2,9 @@ package com.proffl.typing.entity;
 
 import javax.persistence.*;
 
-@SqlResultSetMapping(name = "wordAnalysisMapping", classes = @ConstructorResult(
-        targetClass = WordAnalysis.class,
-        columns = {
-                @ColumnResult(name = "word"),
-                @ColumnResult(name = "input_chars"),
-                @ColumnResult(name = "avg_duration", type = Double.class),
-                @ColumnResult(name = "min_duration", type = Double.class),
-                @ColumnResult(name = "max_duration", type = Double.class),
-                @ColumnResult(name = "wrong_count", type = Integer.class),
-                @ColumnResult(name = "extra_count", type = Integer.class),
-                @ColumnResult(name = "backspace_count", type = Integer.class),
-                @ColumnResult(name = "enter_count", type = Integer.class)
-        }
-))
-@NamedNativeQuery(name = "selectWordAnalysis", query = "select a.word, a.input_chars, b.avg_duration, b.min_duration, b.max_duration, b.wrong_count, b.extra_count, b.backspace_count, b.enter_count from word a left join(\n" +
+@NamedNativeQuery(name = "selectWordAnalysis", query = "select a.word word, a.input_chars input_chars, b.avg_duration avg_duration, b.min_duration min_duration, b.max_duration max_duration, b.wrong_count wrong_count, b.extra_count extra_count, b.backspace_count backspace_count, b.enter_count enter_count from word a left join(\n" +
         "SELECT word, avg(typing_duration) avg_duration, min(typing_duration) min_duration, max(typing_duration) max_duration, sum(is_wrong) wrong_count, sum(is_extra) extra_count, sum(backspace_entered) backspace_count, sum(enter_entered) enter_count  FROM word_detail group by word\n" +
-        ") b on a.word=b.word order by b.avg_duration desc")
+        ") b on a.word=b.word order by b.avg_duration desc", resultClass = WordAnalysis.class)
 @Entity
 public class WordAnalysis {
     @Id
@@ -27,11 +13,11 @@ public class WordAnalysis {
     @Column(name = "INPUT_CHARS")
     private String inputChars;
     @Column(name = "AVG_DURATION")
-    private Double avgDuration;
+    private Integer avgDuration;
     @Column(name = "MIN_DURATION")
-    private Double minDuration;
+    private Integer minDuration;
     @Column(name = "MAX_DURATION")
-    private Double maxDuration;
+    private Integer maxDuration;
     @Column(name = "WRONG_COUNT")
     private Integer wrongCount;
     @Column(name = "EXTRA_COUNT")
@@ -44,7 +30,7 @@ public class WordAnalysis {
     public WordAnalysis() {
     }
 
-    public WordAnalysis(String word, String inputChars, Double avgDuration, Double minDuration, Double maxDuration, Integer wrongCount, Integer extraCount, Integer backspaceCount, Integer enterCount) {
+    public WordAnalysis(String word, String inputChars, Integer avgDuration, Integer minDuration, Integer maxDuration, Integer wrongCount, Integer extraCount, Integer backspaceCount, Integer enterCount) {
         this.word = word;
         this.inputChars = inputChars;
         this.avgDuration = avgDuration;
@@ -103,27 +89,27 @@ public class WordAnalysis {
         this.inputChars = inputChars;
     }
 
-    public Double getAvgDuration() {
+    public Integer getAvgDuration() {
         return avgDuration;
     }
 
-    public void setAvgDuration(Double avgDuration) {
+    public void setAvgDuration(Integer avgDuration) {
         this.avgDuration = avgDuration;
     }
 
-    public Double getMinDuration() {
+    public Integer getMinDuration() {
         return minDuration;
     }
 
-    public void setMinDuration(Double minDuration) {
+    public void setMinDuration(Integer minDuration) {
         this.minDuration = minDuration;
     }
 
-    public Double getMaxDuration() {
+    public Integer getMaxDuration() {
         return maxDuration;
     }
 
-    public void setMaxDuration(Double maxDuration) {
+    public void setMaxDuration(Integer maxDuration) {
         this.maxDuration = maxDuration;
     }
 

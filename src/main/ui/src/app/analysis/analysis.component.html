@@ -1,5 +1,27 @@
 <div>
-  <mat-table class="mat-elevation-z8">
+  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
 
+  <mat-table class="mat-elevation-z8" [dataSource]="dataSource"
+             matSort matSortActive="avgDuration" matSortDirection="desc" matSortDisableClear>
+
+    <ng-container matColumnDef="word">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+      <mat-cell *matCellDef="let analyzedWord">{{analyzedWord.word}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="avgDuration">
+      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+      <mat-cell class="description-cell"
+                *matCellDef="let analyzedWord">{{analyzedWord.avgDuration}}</mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>
+
+  <mat-paginator [length]="999" [pageSize]="30"
+                 [pageSizeOptions]="[10, 30, 50]"></mat-paginator>
 </div>
