@@ -28,4 +28,9 @@ public class WordDetailController {
     public void delete(@RequestParam Integer paramId) {
         wordDetailService.delete(paramId);
     }
+
+    @RequestMapping(value = "/api/word_detail/deletePlus", method = RequestMethod.DELETE)
+    public void delete5Plus(@RequestParam(required = false, defaultValue = "3000") Integer typingDuration) {
+        wordDetailService.deletePlus(typingDuration);
+    }
 }

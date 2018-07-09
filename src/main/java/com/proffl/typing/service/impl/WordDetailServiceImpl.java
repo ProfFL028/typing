@@ -46,4 +46,9 @@ public class WordDetailServiceImpl implements WordDetailService {
     public void delete(Integer paramId) {
         this.wordAnalysisRepository.deleteById(paramId);
     }
+
+    @Override
+    public void deletePlus(Integer typingDuration) {
+        this.wordAnalysisRepository.deletePlus(typingDuration);
+    }
 }

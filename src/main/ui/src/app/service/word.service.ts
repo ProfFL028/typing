@@ -43,4 +43,5 @@ export class WordService {
       map(res => res)
     );
   }
+
 }

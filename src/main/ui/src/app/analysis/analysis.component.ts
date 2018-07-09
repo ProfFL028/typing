@@ -6,6 +6,7 @@ import {fromEvent} from 'rxjs/internal/observable/fromEvent';
 import {debounceTime, distinctUntilChanged, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import {WordDetailService} from '../service/word-detail.service';
 
 @Component({
   selector: 'app-analysis',
@@ -22,7 +23,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class AnalysisComponent implements OnInit, AfterViewInit {
 
   dataSource: AnalyzedWordsDataSource;
-  constructor(private router: Router, private wordService: WordService) { }
+  constructor(private router: Router, private wordService: WordService, private wordDetailService: WordDetailService) { }
 
   displayedColumns = ['word', 'inputChars', 'avgDuration', 'minDuration', 'maxDuration', 'wrongCount', 'extraCount', 'backspaceCount', 'enterCount'];
 
@@ -58,6 +59,12 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   refresh($event) {
     this.paginator.pageIndex = 0;
     this.loadWordAnalysis();
+  }
+
+  delete5Plus() {
+    this.wordDetailService.delete5Plus().subscribe(()=>{
+      this.refresh(null);
+    });
   }
 
 }

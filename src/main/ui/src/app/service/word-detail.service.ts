@@ -28,4 +28,10 @@ export class WordDetailService {
       params: new HttpParams().set('paramId', paramId.toString())
     }).pipe();
   }
+
+  delete5Plus() {
+    return this.httpClient.delete(this.apiRoot + '/deletePlus', {
+      params: new HttpParams().set('typingDuration', '3000')
+    }).pipe();
+  }
 }

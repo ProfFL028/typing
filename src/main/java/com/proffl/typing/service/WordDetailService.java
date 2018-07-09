@@ -16,4 +16,6 @@ public interface WordDetailService {
     List<WordDetailEntity> get(String word);
 
     void delete(Integer paramId);
+
+    void deletePlus(Integer typingDuration);
 }

@@ -1,8 +1,13 @@
 <div>
-  <mat-form-field>
-    <input #filterLetter matInput placeholder="包含字母" >
-  </mat-form-field>
+  <div fxLayout="row">
+    <mat-form-field>
+      <input #filterLetter matInput placeholder="包含字母" >
+    </mat-form-field>
+    <span fxFlex>
 
+    </span>
+    <button mat-raised-button color="warn" (click)="delete5Plus()">删除输入3秒以上记录</button>
+  </div>
   <div class="spinner-container" *ngIf="dataSource.loading$ | async">
     <mat-spinner></mat-spinner>
   </div>

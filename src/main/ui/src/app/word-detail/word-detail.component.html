@@ -4,7 +4,6 @@
     </div>
 
     <mat-table #table class="word-container mat-elevation-z8" [dataSource]="dataSource">
-
         <ng-container matColumnDef="inputChars">
             <mat-header-cell *matHeaderCellDef>按键字母</mat-header-cell>
             <mat-cell *matCellDef="let detail"><p class="autoWrap">{{detail.inputChars}}</p></mat-cell>
