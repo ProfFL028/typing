@@ -40,7 +40,7 @@
                       *matCellDef="let detail"><span [class]="detail.enterEntered?'red':''">{{detail.enterEntered?'是':'否'}}</span></mat-cell>
         </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
         <mat-row *matRowDef="let detail; columns: displayedColumns" class="element-row"></mat-row>
     </mat-table>
 
