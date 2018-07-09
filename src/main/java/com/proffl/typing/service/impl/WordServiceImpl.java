@@ -2,6 +2,7 @@ package com.proffl.typing.service.impl;
 
 import com.proffl.typing.entity.WordAnalysis;
 import com.proffl.typing.entity.WordEntity;
+import com.proffl.typing.repository.WordDetailRepository;
 import com.proffl.typing.repository.WordRepository;
 import com.proffl.typing.service.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class WordServiceImpl implements WordService {
 
     @Autowired
     private WordRepository wordRepository;
+
+    @Autowired
+    private WordDetailRepository wordDetailRepository;
 
     @Override
     public List<WordEntity> getAllWords() {
@@ -56,6 +60,8 @@ public class WordServiceImpl implements WordService {
 
     @Override
     public List<WordAnalysis> getAnalyzedWords(int pageSize, int pageIndex, String filterLetter) {
-        return wordRepository.getAnalyzedWords(pageSize, pageIndex, filterLetter);
+        List<WordAnalysis> wordAnalyses = wordRepository.getAnalyzedWords(pageSize, pageIndex, filterLetter);
+        wordAnalyses.forEach(analyzedWord -> analyzedWord.setDetails(wordDetailRepository.findByWordWord(analyzedWord.getWord())));
+        return wordAnalyses;
     }
 }

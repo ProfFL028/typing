@@ -25,7 +25,12 @@ export class AnalyzedWordsDataSource implements DataSource<AnalyzedWordEntity> {
     this.wordService.getAnalyzedWords(pageSize, pageIndex, filterLetter).pipe(
       catchError(()=>[]),
       finalize(() => this.loadingSubject.next(false))
-    ).subscribe(analyzedWords => this.analyzedWordSubject.next(analyzedWords));
+    ).subscribe(analyzedWords =>
+    {
+      const rows = [];
+      analyzedWords.forEach(analyzedWord => rows.push(analyzedWord, {detailRow: true, analyzedWord}));
+      this.analyzedWordSubject.next(rows);
+    });
   }
 
   connect(collectionViewer: CollectionViewer): Observable<AnalyzedWordEntity[]> {

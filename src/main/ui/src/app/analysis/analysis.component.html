@@ -7,7 +7,7 @@
     <mat-spinner></mat-spinner>
   </div>
 
-  <mat-table class="mat-elevation-z8" [dataSource]="dataSource">
+  <mat-table #table class="word-container mat-elevation-z8" [dataSource]="dataSource">
 
     <ng-container matColumnDef="word">
       <mat-header-cell *matHeaderCellDef>汉字</mat-header-cell>
@@ -62,9 +62,17 @@
                 *matCellDef="let analyzedWord">{{analyzedWord.enterCount}}</mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="expandedDetail">
+      <mat-cell *matCellDef="let detail">
+        The symbol for {{detail.analyzedWord.word}} is {{detail.analyzedWord.inputChars}}
+      </mat-cell>
+    </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns" matRipple class="element-row"  [class.expanded]="expandedElement == row" (click)="expandedElement = row"></mat-row>
+    <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+             [@detailExpand]="row.analyzedWord == expandedElement ? 'expanded' : 'collapsed'"
+             style="overflow: hidden"></mat-row>
   </mat-table>
 
   <mat-paginator [length]="3755" [pageSize]="10"

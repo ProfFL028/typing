@@ -1,15 +1,23 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AnalyzedWordsDataSource} from '../service/analyzed-words-data-source.service';
 import {WordService} from '../service/word.service';
-import {MatPaginator, MatSort} from '@angular/material';
+import {MatPaginator} from '@angular/material';
 import {fromEvent} from 'rxjs/internal/observable/fromEvent';
 import {debounceTime, distinctUntilChanged, tap} from 'rxjs/operators';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-analysis',
   templateUrl: './analysis.component.html',
-  styleUrls: ['./analysis.component.css']
+  styleUrls: ['./analysis.component.css'],
+  animations: [
+      trigger('detailExpand', [
+          state('collapsed', style({ height: '0px', minHeight: '0', visibility: 'hidden' })),
+          state('expanded', style({ height: '*', visibility: 'visible' })),
+          transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      ]),
+  ],
 })
 export class AnalysisComponent implements OnInit, AfterViewInit {
 
@@ -21,6 +29,9 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   @ViewChild('filterLetter') filterLetterRef: ElementRef;
+
+  isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
+  expandedElement: any;
 
   ngOnInit() {
     this.dataSource = new AnalyzedWordsDataSource(this.wordService);

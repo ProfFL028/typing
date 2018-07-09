@@ -1,6 +1,7 @@
 package com.proffl.typing.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NamedNativeQuery(name = "selectWordAnalysis", query = "select a.word word, a.input_chars input_chars, b.avg_duration avg_duration, b.min_duration min_duration, b.max_duration max_duration, b.wrong_count wrong_count, b.extra_count extra_count, b.backspace_count backspace_count, b.enter_count enter_count from word a left join(\n" +
         "SELECT word, avg(typing_duration) avg_duration, min(typing_duration) min_duration, max(typing_duration) max_duration, sum(is_wrong) wrong_count, sum(is_extra) extra_count, sum(backspace_entered) backspace_count, sum(enter_entered) enter_count  FROM word_detail group by word\n" +
@@ -22,10 +23,13 @@ public class WordAnalysis {
     private Integer wrongCount;
     @Column(name = "EXTRA_COUNT")
     private Integer extraCount;
-    @Column(name="BACKSPACE_COUNT")
+    @Column(name = "BACKSPACE_COUNT")
     private Integer backspaceCount;
     @Column(name = "ENTER_COUNT")
     private Integer enterCount;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "word")
+    private List<WordDetailEntity> details;
 
     public WordAnalysis() {
     }
@@ -128,4 +132,14 @@ public class WordAnalysis {
     public void setExtraCount(Integer extraCount) {
         this.extraCount = extraCount;
     }
+
+
+    public List<WordDetailEntity> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<WordDetailEntity> details) {
+        this.details = details;
+    }
+
 }
