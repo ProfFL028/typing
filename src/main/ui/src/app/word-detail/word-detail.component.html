@@ -1,37 +1,47 @@
 <div>
-    <div class="spinner-container" *ngIf="wordDetailDataSource.loading$ | async">
+    <div class="spinner-container" *ngIf="dataSource.loading$ | async">
         <mat-spinner></mat-spinner>
     </div>
 
-    <mat-table #table class="mat-elevation-z8" [dataSource]="wordDetailDataSource">
+    <mat-table #table class="word-container mat-elevation-z8" [dataSource]="dataSource">
 
-        <ng-container matColumnDef="typingDuration">
-            <mat-header-cell *matHeaderCellDef>输入时长（毫秒）</mat-header-cell>
-            <mat-cell *matCellDef="let wordDetail">{{wordDetail.typingDuration}}</mat-cell>
+        <ng-container matColumnDef="inputChars">
+            <mat-header-cell *matHeaderCellDef>按键字母</mat-header-cell>
+            <mat-cell *matCellDef="let detail">{{detail.inputChars}}</mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="isWrong">
-            <mat-header-cell *matHeaderRowDef>是否正确</mat-header-cell>
-            <mat-cell *matCellDef="let wordDetail">{{wordDetail.isWrong}}</mat-cell>
+        <ng-container matColumnDef="typingDuration">
+            <mat-header-cell *matHeaderCellDef>输入时长</mat-header-cell>
+            <mat-cell class="description-cell"
+                      *matCellDef="let detail">{{detail.typingDuration}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="inputValue">
+            <mat-header-cell *matHeaderCellDef>实际输入</mat-header-cell>
+            <mat-cell class="description-cell"
+                      *matCellDef="let detail"><span [class]="detail.isWrong?'red':''">{{detail.inputValue}}</span></mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="isExtra">
-            <mat-header-cell *matHeaderRowDef>多码输入</mat-header-cell>
-            <mat-cell *matCellDef="let wordDetail">{{wordDetail.isExtra}}</mat-cell>
+            <mat-header-cell *matHeaderCellDef>是否多码</mat-header-cell>
+            <mat-cell class="description-cell"
+                      *matCellDef="let detail"><span [class]="detail.isExtra?'purple':''">{{detail.isExtra?'是':'否'}}</span></mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="backspaceEntered">
-            <mat-header-cell *matHeaderRowDef>按删除键</mat-header-cell>
-            <mat-cell *matCellDef="let wordDetail">{{wordDetail.backspaceEntered}}</mat-cell>
+            <mat-header-cell *matHeaderCellDef>删除键</mat-header-cell>
+            <mat-cell class="description-cell"
+                      *matCellDef="let detail"><span [class]="detail.backspaceEntered?'red':''">{{detail.backspaceEntered?'是':'否'}}</span></mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="enterEntered">
-            <mat-header-cell *matHeaderRowDef>按回车键</mat-header-cell>
-            <mat-cell *matCellDef="let wordDetail">{{wordDetail.enterEntered}}</mat-cell>
+            <mat-header-cell *matHeaderCellDef>回车键</mat-header-cell>
+            <mat-cell class="description-cell"
+                      *matCellDef="let detail"><span [class]="detail.enterEntered?'red':''">{{detail.enterEntered?'是':'否'}}</span></mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        <mat-row *matRowDef="let detail; columns: displayedColumns" class="element-row"></mat-row>
     </mat-table>
 
     <mat-paginator [length]="3755" [pageSize]="5"

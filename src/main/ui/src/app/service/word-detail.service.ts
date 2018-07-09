@@ -17,7 +17,7 @@ export class WordDetailService {
     return this.httpClient.get(this.apiRoot + '/page', {
       params: new HttpParams().set('word', word).set('size', pageSize.toString()).set('page', pageIndex.toString())
     }).pipe(
-      map(res => res['content'])
+      map(res => res)
     );
   }
 }

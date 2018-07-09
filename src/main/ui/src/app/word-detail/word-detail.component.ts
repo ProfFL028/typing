@@ -12,9 +12,9 @@ import {tap} from 'rxjs/operators';
 })
 export class WordDetailComponent implements OnInit, AfterViewInit {
 
-  displayedColumns = ['typingDuration', 'isWrong', 'isExtra', 'backspaceEntered', 'enterEntered', 'inputValue'];
+  displayedColumns = ['inputChars', 'typingDuration', 'inputValue','isExtra', 'backspaceEntered', 'enterEntered'];
 
-  wordDetailDataSource: WordDetailDataSource;
+  dataSource: WordDetailDataSource;
   @Input()
   word: string;
 
@@ -23,8 +23,8 @@ export class WordDetailComponent implements OnInit, AfterViewInit {
   constructor(private route: Router, private wordDetailService: WordDetailService) { }
 
   ngOnInit() {
-    this.wordDetailDataSource = new WordDetailDataSource(this.wordDetailService);
-    this.wordDetailDataSource.loadWordDetails(this.word, 5, 0);
+    this.dataSource = new WordDetailDataSource(this.wordDetailService);
+    this.dataSource.loadWordDetails(this.word, 5, 0);
   }
 
   ngAfterViewInit(): void {
@@ -32,6 +32,6 @@ export class WordDetailComponent implements OnInit, AfterViewInit {
   }
 
   loadWordDetails() {
-    this.wordDetailDataSource.loadWordDetails(this.word, this.paginator.pageSize, this.paginator.pageIndex);
+    this.dataSource.loadWordDetails(this.word, this.paginator.pageSize, this.paginator.pageIndex);
   }
 }

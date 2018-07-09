@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class WordDetailController {
 
@@ -18,10 +20,10 @@ public class WordDetailController {
 
     @RequestMapping("/api/word_detail/page")
     public @ResponseBody
-    Page<WordDetailEntity> getWordDetails(
+    List<WordDetailEntity> getWordDetails(
             Pageable pageable,
             @RequestParam(required = false, defaultValue = "") String word
     ) {
-        return wordDetailService.page(word, pageable);
+        return wordDetailService.get(word);
     }
 }

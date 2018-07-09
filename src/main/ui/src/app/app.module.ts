@@ -30,7 +30,8 @@ import { WordDetailComponent } from './word-detail/word-detail.component';
 
 const appRoutes: Routes = [
   {path: 'typing', component: TypingComponent},
-  {path: 'analysis', component: WordDetailComponent}
+  {path: 'analysis', component: AnalysisComponent},
+  {path: 'word_detail', component: WordDetailComponent}
 ];
 
 @NgModule({

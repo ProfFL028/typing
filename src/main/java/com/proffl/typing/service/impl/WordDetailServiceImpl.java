@@ -36,4 +36,9 @@ public class WordDetailServiceImpl implements WordDetailService {
     public Page<WordDetailEntity> page(String word, Pageable pageable) {
         return this.wordAnalysisRepository.findByWordWord(word, pageable);
     }
+
+    @Override
+    public List<WordDetailEntity> get(String word) {
+        return this.wordAnalysisRepository.findByWordWord(word);
+    }
 }

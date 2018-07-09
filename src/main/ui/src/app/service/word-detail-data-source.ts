@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/internal/Observable';
 import {Injectable} from '@angular/core';
 import {WordDetailService} from './word-detail.service';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
-import {catchError, finalize} from 'rxjs/operators';
+import {catchError, finalize, tap} from 'rxjs/operators';
 
 
 @Injectable({
