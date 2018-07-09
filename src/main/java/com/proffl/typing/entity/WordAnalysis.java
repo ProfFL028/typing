@@ -28,9 +28,6 @@ public class WordAnalysis {
     @Column(name = "ENTER_COUNT")
     private Integer enterCount;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "word")
-    private List<WordDetailEntity> details;
-
     public WordAnalysis() {
     }
 
@@ -132,14 +129,4 @@ public class WordAnalysis {
     public void setExtraCount(Integer extraCount) {
         this.extraCount = extraCount;
     }
-
-
-    public List<WordDetailEntity> getDetails() {
-        return details;
-    }
-
-    public void setDetails(List<WordDetailEntity> details) {
-        this.details = details;
-    }
-
 }

@@ -7,7 +7,7 @@
 
         <ng-container matColumnDef="inputChars">
             <mat-header-cell *matHeaderCellDef>按键字母</mat-header-cell>
-            <mat-cell *matCellDef="let detail">{{detail.inputChars}}</mat-cell>
+            <mat-cell *matCellDef="let detail"><p class="autoWrap">{{detail.inputChars}}</p></mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="typingDuration">
@@ -44,6 +44,6 @@
         <mat-row *matRowDef="let detail; columns: displayedColumns" class="element-row"></mat-row>
     </mat-table>
 
-    <mat-paginator [length]="3755" [pageSize]="5"
+    <mat-paginator [length]="dataSource.totalNumber$" [pageSize]="8"
                    [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
 </div>

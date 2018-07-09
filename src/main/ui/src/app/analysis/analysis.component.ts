@@ -35,7 +35,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.dataSource = new AnalyzedWordsDataSource(this.wordService);
-    this.dataSource.loadAnalyzedWords(10, 1, '');
+    this.dataSource.loadAnalyzedWords(8, 1, '');
   }
 
   ngAfterViewInit() {

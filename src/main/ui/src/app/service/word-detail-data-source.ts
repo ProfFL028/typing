@@ -15,8 +15,10 @@ export class WordDetailDataSource implements DataSource<WordDetailEntity> {
 
   private wordDetailSubject = new BehaviorSubject<WordDetailEntity[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);
+  private totalNumberSubject = new BehaviorSubject<number>(0);
 
   public loading$: Observable<boolean> = this.loadingSubject.asObservable();
+  public totalNumber$: Observable<number> = this.totalNumberSubject.asObservable();
 
   constructor(private wordDetailService: WordDetailService) {
 
@@ -27,7 +29,10 @@ export class WordDetailDataSource implements DataSource<WordDetailEntity> {
     this.wordDetailService.getWordDetail(word, pageSize, pageIndex).pipe(
       catchError(()=> []),
       finalize(()=> this.loadingSubject.next(false))
-    ).subscribe(wordDetails=> this.wordDetailSubject.next(wordDetails));
+    ).subscribe(page=> {
+      this.wordDetailSubject.next(page.content);
+      this.totalNumberSubject.next(page.totalNumber);
+    });
   }
 
   connect(collectionViewer: CollectionViewer): Observable<WordDetailEntity[]> {

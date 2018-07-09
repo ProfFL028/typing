@@ -20,10 +20,10 @@ public class WordDetailController {
 
     @RequestMapping("/api/word_detail/page")
     public @ResponseBody
-    List<WordDetailEntity> getWordDetails(
+    Page<WordDetailEntity> getWordDetails(
             Pageable pageable,
             @RequestParam(required = false, defaultValue = "") String word
     ) {
-        return wordDetailService.get(word);
+        return wordDetailService.page(word, pageable);
     }
 }
