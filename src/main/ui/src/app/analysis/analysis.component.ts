@@ -44,8 +44,4 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
     this.dataSource.loadAnalyzedWords(this.paginator.pageSize, this.paginator.pageIndex, this.filterLetterRef.nativeElement.value);
   }
 
-  onRowClick(row) {
-    console.log(row);
-    this.router.navigateByUrl('');
-  }
 }

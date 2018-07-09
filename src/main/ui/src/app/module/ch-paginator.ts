@@ -1,6 +1,6 @@
 import {MatPaginatorIntl} from '@angular/material';
 
-const chGetRangeLabel = (page: number, pageSize: number, length: number): string {
+const chGetRangeLabel = (page: number, pageSize: number, length: number) => {
   if (length == 0 || pageSize == 0) { return `0 至 ${length}`; }
 
   length = Math.max(length, 0);
