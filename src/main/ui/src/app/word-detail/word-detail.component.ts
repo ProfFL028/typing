@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {WordDetailService} from '../service/word-detail.service';
 import {WordDetailDataSource} from '../service/word-detail-data-source';
@@ -12,13 +12,16 @@ import {tap} from 'rxjs/operators';
 })
 export class WordDetailComponent implements OnInit, AfterViewInit {
 
-  displayedColumns = ['inputChars', 'typingDuration', 'inputValue','isExtra', 'backspaceEntered', 'enterEntered'];
+  displayedColumns = ['inputChars', 'typingDuration', 'inputValue','isExtra', 'backspaceEntered', 'enterEntered', 'toolbar'];
 
   dataSource: WordDetailDataSource;
   @Input()
   word: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  @Output()
+  onWordDelete: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private route: Router, private wordDetailService: WordDetailService) { }
 
@@ -33,5 +36,11 @@ export class WordDetailComponent implements OnInit, AfterViewInit {
 
   loadWordDetails() {
     this.dataSource.loadWordDetails(this.word, this.paginator.pageSize, this.paginator.pageIndex);
+  }
+
+  delete(paramId: number) {
+    this.wordDetailService.delete(paramId).subscribe(()=>{
+      this.onWordDelete.emit(paramId);
+    });
   }
 }

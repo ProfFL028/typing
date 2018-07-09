@@ -40,6 +40,13 @@
                       *matCellDef="let detail"><span [class]="detail.enterEntered?'red':''">{{detail.enterEntered?'是':'否'}}</span></mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="toolbar">
+            <mat-header-cell *matHeaderCellDef>操作</mat-header-cell>
+            <mat-cell *matCellDef="let detail">
+                <button mat-mini-fab color="warn" (click)="delete(detail.paramId)">X</button>
+            </mat-cell>
+        </ng-container>
+
         <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
         <mat-row *matRowDef="let detail; columns: displayedColumns" class="element-row"></mat-row>
     </mat-table>

@@ -5,10 +5,7 @@ import com.proffl.typing.service.WordDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,10 @@ public class WordDetailController {
             @RequestParam(required = false, defaultValue = "") String word
     ) {
         return wordDetailService.page(word, pageable);
+    }
+
+    @RequestMapping(value = "/api/word_detail/delete", method = RequestMethod.DELETE)
+    public void delete(@RequestParam Integer paramId) {
+        wordDetailService.delete(paramId);
     }
 }

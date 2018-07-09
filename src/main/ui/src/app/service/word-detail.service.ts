@@ -17,8 +17,15 @@ export class WordDetailService {
   getWordDetail(word:string, pageSize: number, pageIndex: number): Observable<Page<WordDetailEntity>> {
     return this.httpClient.get<Page<WordDetailEntity>>(this.apiRoot + '/page', {
       params: new HttpParams().set('word', word).set('size', pageSize.toString()).set('page', pageIndex.toString())
+        .set('sort', 'paramId,desc')
     }).pipe(
       map(res => res)
     );
+  }
+
+  delete(paramId: number) {
+    return this.httpClient.delete(this.apiRoot + '/delete', {
+      params: new HttpParams().set('paramId', paramId.toString())
+    }).pipe();
   }
 }

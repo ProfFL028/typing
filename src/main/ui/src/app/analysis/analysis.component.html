@@ -64,7 +64,7 @@
 
     <ng-container matColumnDef="expandedDetail">
       <mat-cell *matCellDef="let detail">
-        <app-word-detail [word]="detail.analyzedWord.word"></app-word-detail>
+        <app-word-detail [word]="detail.analyzedWord.word" (onWordDelete)="refresh($event);"></app-word-detail>
       </mat-cell>
     </ng-container>
 

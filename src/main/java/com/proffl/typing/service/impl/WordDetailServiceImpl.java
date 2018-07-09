@@ -41,4 +41,9 @@ public class WordDetailServiceImpl implements WordDetailService {
     public List<WordDetailEntity> get(String word) {
         return this.wordAnalysisRepository.findByWordWord(word);
     }
+
+    @Override
+    public void delete(Integer paramId) {
+        this.wordAnalysisRepository.deleteById(paramId);
+    }
 }

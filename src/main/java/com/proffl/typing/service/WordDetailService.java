@@ -14,4 +14,6 @@ public interface WordDetailService {
     Page<WordDetailEntity> page(String word, Pageable pageable);
 
     List<WordDetailEntity> get(String word);
+
+    void delete(Integer paramId);
 }
