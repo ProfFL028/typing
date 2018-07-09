@@ -64,7 +64,7 @@
 
     <ng-container matColumnDef="expandedDetail">
       <mat-cell *matCellDef="let detail">
-        The symbol for {{detail.analyzedWord.word}} is {{detail.analyzedWord.inputChars}}
+        <app-word-detail [word]="detail.analyzedWord.word"></app-word-detail>
       </mat-cell>
     </ng-container>
 
@@ -78,9 +78,3 @@
   <mat-paginator [length]="3755" [pageSize]="10"
                  [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
 </div>
-
-<!--<ng-template #tpl let-analyzedWord>-->
-  <!--<div class="mat-row" [@detailExpand] style="overflow: hidden">-->
-    <!--The symbol for {{analyzedWord.words}} is {{analyzedWord.}}-->
-  <!--</div>-->
-<!--</ng-template>-->

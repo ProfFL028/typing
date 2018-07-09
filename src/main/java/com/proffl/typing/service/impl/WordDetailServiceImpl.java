@@ -5,7 +5,11 @@ import com.proffl.typing.entity.WordDetailEntity;
 import com.proffl.typing.repository.WordDetailRepository;
 import com.proffl.typing.service.WordDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class WordDetailServiceImpl implements WordDetailService {
@@ -26,5 +30,10 @@ public class WordDetailServiceImpl implements WordDetailService {
             }
         }
         return updateCount;
+    }
+
+    @Override
+    public Page<WordDetailEntity> page(String word, Pageable pageable) {
+        return this.wordAnalysisRepository.findByWordWord(word, pageable);
     }
 }

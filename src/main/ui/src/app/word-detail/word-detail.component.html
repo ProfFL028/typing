@@ -1,3 +1,39 @@
-<p>
-  word-detail works!
-</p>
+<div>
+    <div class="spinner-container" *ngIf="wordDetailDataSource.loading$ | async">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <mat-table #table class="mat-elevation-z8" [dataSource]="wordDetailDataSource">
+
+        <ng-container matColumnDef="typingDuration">
+            <mat-header-cell *matHeaderCellDef>输入时长（毫秒）</mat-header-cell>
+            <mat-cell *matCellDef="let wordDetail">{{wordDetail.typingDuration}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="isWrong">
+            <mat-header-cell *matHeaderRowDef>是否正确</mat-header-cell>
+            <mat-cell *matCellDef="let wordDetail">{{wordDetail.isWrong}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="isExtra">
+            <mat-header-cell *matHeaderRowDef>多码输入</mat-header-cell>
+            <mat-cell *matCellDef="let wordDetail">{{wordDetail.isExtra}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="backspaceEntered">
+            <mat-header-cell *matHeaderRowDef>按删除键</mat-header-cell>
+            <mat-cell *matCellDef="let wordDetail">{{wordDetail.backspaceEntered}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="enterEntered">
+            <mat-header-cell *matHeaderRowDef>按回车键</mat-header-cell>
+            <mat-cell *matCellDef="let wordDetail">{{wordDetail.enterEntered}}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <mat-paginator [length]="3755" [pageSize]="5"
+                   [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+</div>
