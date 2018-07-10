@@ -1,9 +1,10 @@
-import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {WordService} from '../service/word.service';
 import {Observable} from 'rxjs/internal/Observable';
 import {ConfigService} from '../service/config.service';
 import {first, map, publishLast, refCount, switchMap, tap} from 'rxjs/operators';
 import {WordDetailEntity} from '../shared/entity/word-detail.entity';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,17 +25,22 @@ export class TypingComponent implements OnInit {
 
   words$: Observable<WordDetailEntity[]>;
 
-  constructor(private wordService: WordService, private configService: ConfigService) {
+  constructor(private r: Router, private router: ActivatedRoute, private wordService: WordService, private configService: ConfigService) {
   }
 
   ngOnInit() {
-    this.configService.getConfig().subscribe();
-    this.refreshWords();
+    this.router.queryParams.subscribe(params => {
+      this.configService.getConfig().subscribe();
+      this.refreshWords();
+    });
   }
 
   refreshWords() {
     this.words$ = this.configService.config$.pipe(
-      switchMap(config => this.wordService.getWords(this.WORD_SIZE, config.isRepeat)),
+      switchMap(config => {
+        const wrong_word = this.router.snapshot.queryParams['wrong'];
+        return this.wordService.getWords(this.WORD_SIZE, config.isRepeat, wrong_word);
+      }),
       first(),
       publishLast(),
       refCount()

@@ -59,6 +59,14 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
+    public List<WordEntity> getWrongWords(int wordCount) {
+        List<WordEntity> wrongList = new ArrayList<>();
+        List<WordEntity> wrongFromDb = wordRepository.getWrong(wordCount);
+        // TODO: fulfill wrongList
+        return wrongList;
+    }
+
+    @Override
     public List<WordAnalysis> getAnalyzedWords(int pageSize, int pageIndex, String filterLetter) {
         return wordRepository.getAnalyzedWords(pageSize, pageIndex, filterLetter);
     }

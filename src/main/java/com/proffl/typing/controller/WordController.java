@@ -17,8 +17,15 @@ public class WordController {
     public @ResponseBody
     List<WordEntity> getWords(
             @RequestParam(required = false, defaultValue = "210") Integer wordCount,
-            @RequestParam(required = false, defaultValue = "false") Boolean isRepeat) {
-        return wordService.getWords(wordCount, isRepeat);
+            @RequestParam(required = false, defaultValue = "false") Boolean isRepeat,
+            @RequestParam(required = false, defaultValue = "false") Boolean wrongWord) {
+        if (!wrongWord) {
+            System.out.println("i'm right");
+            return wordService.getWords(wordCount, isRepeat);
+        } else {
+            System.out.println("I'm here");
+            return wordService.getWrongWords(wordCount);
+        }
     }
 
     @RequestMapping("/api/word/get_analyzed_words")

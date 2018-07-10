@@ -1,6 +1,7 @@
 package com.proffl.typing.repository.custom.impl;
 
 import com.proffl.typing.entity.WordAnalysis;
+import com.proffl.typing.entity.WordEntity;
 import com.proffl.typing.repository.custom.WordRepositoryCustom;
 
 import javax.persistence.EntityManager;
@@ -19,6 +20,12 @@ public class WordRepositoryImpl implements WordRepositoryCustom {
         Query query = entityManager.createNativeQuery("select a.word word, a.input_chars input_chars, b.avg_duration avg_duration, b.min_duration min_duration, b.max_duration max_duration, b.wrong_count wrong_count, b.extra_count extra_count, b.backspace_count backspace_count, b.enter_count enter_count from word a left join(SELECT word, avg(typing_duration) avg_duration, min(typing_duration) min_duration, max(typing_duration) max_duration, sum(is_wrong) wrong_count, sum(is_extra) extra_count, sum(backspace_entered) backspace_count, sum(enter_entered) enter_count  FROM word_detail group by word) b on a.word=b.word where a.input_chars like '%" + filterLetter + "%' order by b.avg_duration desc", WordAnalysis.class);
         query.setFirstResult(pageSize * (pageIndex - 1));
         query.setMaxResults(pageSize);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<WordEntity> getWrong(int wordCount) {
+        Query query = entityManager.createNativeQuery("select word, input_chars from word a where exists(select 1 from word_detail b where (is_wrong=true or is_extra=true) and a.word=b.word) limit 0, " + wordCount, WordEntity.class);
         return query.getResultList();
     }
 }

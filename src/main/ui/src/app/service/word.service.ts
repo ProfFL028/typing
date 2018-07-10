@@ -17,8 +17,8 @@ export class WordService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getWords(wordCount: number, isRepeat = false) {
-    const params = new HttpParams().set('wordCount', wordCount + '').set('isrepeat', isRepeat + '');
+  getWords(wordCount: number, isRepeat = false, wrong_word = false) {
+    const params = new HttpParams().set('wordCount', wordCount + '').set('isrepeat', isRepeat + '').set('wrongWord', wrong_word.toString());
 
     return this.httpClient
       .get<WordEntity[]>(`${this.apiRoot}/get_words?${params.toString()}`, {})

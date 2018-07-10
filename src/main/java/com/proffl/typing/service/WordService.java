@@ -17,6 +17,13 @@ public interface WordService {
     List<WordEntity> getWords(int wordCount, boolean isRepeat);
 
     /**
+     * 取错误的汉字，如果错误的汉字不足wordCount，复制N份，直到达到wordCount
+     * @param wordCount 取的数量,
+     * @return
+     */
+    List<WordEntity> getWrongWords(int wordCount);
+
+    /**
      * 取分析后的word数据
      * @param pageSize
      * @param pageIndex
