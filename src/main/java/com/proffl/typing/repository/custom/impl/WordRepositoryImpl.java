@@ -25,7 +25,7 @@ public class WordRepositoryImpl implements WordRepositoryCustom {
 
     @Override
     public List<WordEntity> getWrong(int wordCount) {
-        Query query = entityManager.createNativeQuery("select word, input_chars from word a where exists(select 1 from word_detail b where (is_wrong=true or is_extra=true) and a.word=b.word) limit 0, " + wordCount, WordEntity.class);
+        Query query = entityManager.createNativeQuery("select a.word, input_chars from word a inner join (select word, avg(typing_duration + case when is_wrong then 1000 else 0 end + case when is_extra then 500 else 0 end) dur from word_detail group by word  order by dur desc limit 0, "+wordCount+") b on a.word=b.word", WordEntity.class);
         return query.getResultList();
     }
 }

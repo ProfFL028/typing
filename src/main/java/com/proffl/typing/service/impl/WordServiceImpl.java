@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -61,8 +62,15 @@ public class WordServiceImpl implements WordService {
     @Override
     public List<WordEntity> getWrongWords(int wordCount) {
         List<WordEntity> wrongList = new ArrayList<>();
-        List<WordEntity> wrongFromDb = wordRepository.getWrong(wordCount);
-        // TODO: fulfill wrongList
+        List<WordEntity> wrongFromDb = wordRepository.getWrong(50);
+        int wrongSize = wrongFromDb.size();
+        if (wrongSize > 0) {
+            Random r = new Random();
+            for (int i = 0; i < wordCount; i++) {
+                int index = r.nextInt(wrongSize);
+                wrongList.add(wrongFromDb.get(index));
+            }
+        }
         return wrongList;
     }
 
