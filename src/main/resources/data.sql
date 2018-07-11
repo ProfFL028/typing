@@ -1205,7 +1205,7 @@ insert into word values('茧', 'aju');
 insert into word values('检', 'sw');
 insert into word values('柬', 'gli');
 insert into word values('碱', 'ddg');
-insert into word values('硷', 'dwg');
+insert into word values('硷', 'dwgi');
 insert into word values('拣', 'ranw');
 insert into word values('捡', 'rwgi');
 insert into word values('简', 'tuj');

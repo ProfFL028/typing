@@ -6,6 +6,7 @@ import {PracticeEntity} from '../shared/entity/practice.entity';
 import {WordDetailEntity} from '../shared/entity/word-detail.entity';
 import {PracticeService} from '../service/practice.service';
 import {tap} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-typing-content',
@@ -40,7 +41,7 @@ export class TypingContentComponent implements OnInit {
 
   @ViewChild('myCD') myCounterDown;
 
-  constructor(private cdRef: ChangeDetectorRef, private practiceService: PracticeService) { }
+  constructor(private route:ActivatedRoute, private cdRef: ChangeDetectorRef, private practiceService: PracticeService) { }
 
   ngOnInit() {
     this.refresh();
@@ -220,6 +221,11 @@ export class TypingContentComponent implements OnInit {
   }
 
   saveTypingInfo() {
+    const wrongWord = this.route.snapshot.queryParams['wrong'];
+    if (wrongWord) {
+      console.log("not saving!");
+      return ;
+    }
     console.log("savingTypingInfo");
     // 确保有打字
     if ((this.curI + this.curJ + this.pageIndex) > 0) {

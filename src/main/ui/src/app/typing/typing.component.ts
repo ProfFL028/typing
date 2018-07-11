@@ -1,10 +1,10 @@
-import {ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
 import {WordService} from '../service/word.service';
 import {Observable} from 'rxjs/internal/Observable';
 import {ConfigService} from '../service/config.service';
-import {first, map, publishLast, refCount, switchMap, tap} from 'rxjs/operators';
+import {first, publishLast, refCount, switchMap} from 'rxjs/operators';
 import {WordDetailEntity} from '../shared/entity/word-detail.entity';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,7 +25,7 @@ export class TypingComponent implements OnInit {
 
   words$: Observable<WordDetailEntity[]>;
 
-  constructor(private r: Router, private router: ActivatedRoute, private wordService: WordService, private configService: ConfigService) {
+  constructor(private r: Router, private router: ActivatedRoute, private wordService: WordService, public configService: ConfigService) {
   }
 
   ngOnInit() {
@@ -57,7 +57,8 @@ export class TypingComponent implements OnInit {
   }
 
   onRefreshClick($event) {
-    this.typingContent.saveTypingInfo();
+
+      this.typingContent.saveTypingInfo();
     this.refreshWords();
     this.typingContent.refresh();
     this.typingContent.focusMe();
